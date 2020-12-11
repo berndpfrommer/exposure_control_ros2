@@ -64,6 +64,8 @@ bool ExposureControl::changeTime(
     currentExposureTime_ = optTime;
 #ifdef DEBUG
     LOG_INFO(debugMsg);
+#else
+    (void)debugMsg;
 #endif
     return (true);
   }
@@ -79,6 +81,8 @@ bool ExposureControl::changeGain(
     currentGain_ = optGain;
 #ifdef DEBUG
     LOG_INFO(debugMsg);
+#else
+    (void)debugMsg;
 #endif
     return (true);
   }
