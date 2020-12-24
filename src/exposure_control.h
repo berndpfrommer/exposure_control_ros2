@@ -20,7 +20,6 @@
 #include <image_meta_msgs_ros2/msg/image_meta_data.hpp>
 #include <memory>
 #include <rclcpp/rclcpp.hpp>
-#include <sensor_msgs/msg/image.hpp>
 
 namespace exposure_control_ros2
 {
