@@ -23,8 +23,6 @@
 
 using namespace std::placeholders;
 
-//#define DEBUG
-
 namespace exposure_control_ros2
 {
 ExposureControl::ExposureControl(const rclcpp::NodeOptions & options)
@@ -41,9 +39,9 @@ ExposureControl::ExposureControl(const rclcpp::NodeOptions & options)
   minFramesSkip_ =
     declare_parameter<int>("min_frames_skip", 10);  // number of frames to wait
   minExposureTime_ =
-    declare_parameter<double>("min_exposure_time", 1000);  //usecs
+    declare_parameter<double>("min_exposure_time", 1000);  // usecs
   maxConfigExposureTime_ =
-    declare_parameter<double>("max_exposure_time", 1000000);  //usecs
+    declare_parameter<double>("max_exposure_time", 1000000);  // usecs
   maxExposureTime_ = maxConfigExposureTime_;
   maxGain_ = declare_parameter<double>("max_gain", 10);  // gain in db
   gainPriority_ = declare_parameter<bool>("gain_priority", false);
@@ -238,15 +236,15 @@ void ExposureControl::metaDataCallback(const ImageMetaData::UniquePtr msg)
     return;
   }
   if (msg->max_exposure_time != 0) {
-    maxDriverAllowedExposureTime_ = (double)msg->max_exposure_time;
+    maxDriverAllowedExposureTime_ = static_cast<double>(msg->max_exposure_time);
     maxExposureTime_ =
       std::min(maxDriverAllowedExposureTime_, maxConfigExposureTime_);
   }
-  const int16_t b = std::min(msg->brightness, (int16_t)255);
+  const int16_t b = std::min(msg->brightness, static_cast<int16_t>(255));
   // if the exposure parameters are not set yet,
   // grab the current values from the msg
   if (currentExposureTime_ == 0) {
-    currentExposureTime_ = (double)msg->exposure_time;
+    currentExposureTime_ = static_cast<double>(msg->exposure_time);
   }
   if (currentGain_ == std::numeric_limits<float>::lowest()) {
     currentGain_ = msg->gain;
@@ -255,8 +253,8 @@ void ExposureControl::metaDataCallback(const ImageMetaData::UniquePtr msg)
 #if 0
   LOG_INFO(
     "msg: " << msg->exposure_time << "/" << currentExposureTime_
-            << " gain: " << msg->gain << "/" << currentGain_
-            << " brightness: " << (int)b);
+    << " gain: " << msg->gain << "/" << currentGain_
+    << " brightness: " << static_cast<int>(b));
 #endif
   // check if the reported exposure and brightness settings
   // match ours. That means the changes have taken effect
@@ -264,18 +262,18 @@ void ExposureControl::metaDataCallback(const ImageMetaData::UniquePtr msg)
   // used right away.
   if (
     fabs(currentGain_ - msg->gain) <= 0.05 * (currentGain_ + msg->gain) &&
-    fabs(currentExposureTime_ - (double)msg->exposure_time) <=
-      0.05 * (currentExposureTime_ + (double)msg->exposure_time) &&
+    fabs(currentExposureTime_ - static_cast<double>(msg->exposure_time)) <=
+      0.05 * (currentExposureTime_ + static_cast<double>(msg->exposure_time)) &&
     numFramesSkip_ < minFramesSkip_) {
     numFramesSkip_ = 0;  // no skipping anymore!
   }
 
   const double oldExposureTime = currentExposureTime_;
   const double oldGain = currentGain_;
-  if (updateExposure(std::max((int16_t)1, b))) {
+  if (updateExposure(std::max(static_cast<int16_t>(1), b))) {
     LOG_INFO(
-      "bright " << (int)b << " at time/gain: [" << oldExposureTime << " "
-                << oldGain << "] new: [" << currentExposureTime_ << " "
+      "bright " << static_cast<int>(b) << " at time/gain: [" << oldExposureTime
+                << " " << oldGain << "] new: [" << currentExposureTime_ << " "
                 << currentGain_ << "]");
     controlMsg_.header = msg->header;
     controlMsg_.gain = currentGain_;

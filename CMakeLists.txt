@@ -39,11 +39,9 @@ endforeach()
 ament_auto_find_build_dependencies(REQUIRED ${ROS2_DEPENDENCIES})
 
 ament_auto_add_library(exposure_control SHARED
-  src/exposure_control.cpp
-  )
+  src/exposure_control.cpp)
 ament_auto_add_executable(exposure_control_node
-  src/exposure_control_node.cpp
-  )
+  src/exposure_control_node.cpp)
 
 rclcpp_components_register_nodes(exposure_control "exposure_control_ros2::ExposureControl")
 
@@ -55,9 +53,8 @@ install(TARGETS
 
 install(DIRECTORY
   launch
-  DESTINATION share/${PROJECT_NAME}/
-)
- 
+  DESTINATION share/${PROJECT_NAME}/)
+
 if(BUILD_TESTING)
   find_package(ament_cmake REQUIRED)
   find_package(ament_cmake_copyright REQUIRED)
@@ -66,7 +63,7 @@ if(BUILD_TESTING)
   find_package(ament_cmake_flake8 REQUIRED)
   find_package(ament_cmake_lint_cmake REQUIRED)
   find_package(ament_cmake_pep257 REQUIRED)
-  find_package(ament_cmake_uncrustify REQUIRED)
+  find_package(ament_cmake_clang_format REQUIRED)
   find_package(ament_cmake_xmllint REQUIRED)
 
   ament_copyright()
@@ -75,8 +72,9 @@ if(BUILD_TESTING)
   ament_flake8()
   ament_lint_cmake()
   ament_pep257()
-  ament_uncrustify()
+  ament_clang_format(CONFIG_FILE .clang-format)
   ament_xmllint()
+
 endif()
 
 ament_package()
