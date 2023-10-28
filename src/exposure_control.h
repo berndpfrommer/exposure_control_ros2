@@ -16,8 +16,8 @@
 #ifndef EXPOSURE_CONTROL_H_
 #define EXPOSURE_CONTROL_H_
 
-#include <camera_control_msgs_ros2/msg/camera_control.hpp>
-#include <image_meta_msgs_ros2/msg/image_meta_data.hpp>
+#include <flir_camera_msgs/msg/camera_control.hpp>
+#include <flir_camera_msgs/msg/image_meta_data.hpp>
 #include <memory>
 #include <rclcpp/rclcpp.hpp>
 
@@ -26,8 +26,8 @@ namespace exposure_control_ros2
 class ExposureControl : public rclcpp::Node
 {
 public:
-  typedef camera_control_msgs_ros2::msg::CameraControl CameraControl;
-  typedef image_meta_msgs_ros2::msg::ImageMetaData ImageMetaData;
+  typedef flir_camera_msgs::msg::CameraControl CameraControl;
+  typedef flir_camera_msgs::msg::ImageMetaData ImageMetaData;
   explicit ExposureControl(const rclcpp::NodeOptions & options);
   ~ExposureControl();
 

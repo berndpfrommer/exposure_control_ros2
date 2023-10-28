@@ -28,10 +28,10 @@ namespace exposure_control_ros2
 ExposureControl::ExposureControl(const rclcpp::NodeOptions & options)
 : Node("exposure_control", options)
 {
-  sub_ = this->create_subscription<image_meta_msgs_ros2::msg::ImageMetaData>(
+  sub_ = this->create_subscription<flir_camera_msgs::msg::ImageMetaData>(
     "~/meta", 1,
     std::bind(&ExposureControl::metaDataCallback, this, std::placeholders::_1));
-  pub_ = create_publisher<camera_control_msgs_ros2::msg::CameraControl>(
+  pub_ = create_publisher<flir_camera_msgs::msg::CameraControl>(
     "~/control", 10);
   brightnessTarget_ = declare_parameter<int>("brightness_target", 120);
   brightnessTolerance_ = declare_parameter<int>("brightness_tolerance", 5);

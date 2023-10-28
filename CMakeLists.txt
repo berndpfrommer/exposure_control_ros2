@@ -23,8 +23,7 @@ endif()
 set(ROS2_DEPENDENCIES
   "rclcpp"
   "rclcpp_components"
-  "image_meta_msgs_ros2"
-  "camera_control_msgs_ros2"
+  "flir_camera_msgs"
 )
 
 # find dependencies

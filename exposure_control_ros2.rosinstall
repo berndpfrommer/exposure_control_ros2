@@ -1,2 +1,1 @@
-- git: {local-name: image_meta_msgs_ros2, uri: 'https://github.com/berndpfrommer/image_meta_msgs_ros2.git', version: 'master'}
-- git: {local-name: camera_control_msgs_ros2, uri: 'https://github.com/berndpfrommer/camera_control_msgs_ros2.git', version: 'master'}
+- git: {local-name: flir_camera_driver, uri: 'https://github.com/ros-drivers/flir_camera_driver', version: 'master'}

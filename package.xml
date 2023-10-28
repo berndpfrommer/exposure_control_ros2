@@ -12,8 +12,7 @@
 
   <depend>rclcpp</depend>
   <depend>rclcpp_components</depend>
-  <depend>camera_control_msgs_ros2</depend>
-  <depend>image_meta_msgs_ros2</depend>
+  <depend>flir_camera_msgs</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
