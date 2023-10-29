@@ -31,8 +31,8 @@ ExposureControl::ExposureControl(const rclcpp::NodeOptions & options)
   sub_ = this->create_subscription<flir_camera_msgs::msg::ImageMetaData>(
     "~/meta", 1,
     std::bind(&ExposureControl::metaDataCallback, this, std::placeholders::_1));
-  pub_ = create_publisher<flir_camera_msgs::msg::CameraControl>(
-    "~/control", 10);
+  pub_ =
+    create_publisher<flir_camera_msgs::msg::CameraControl>("~/control", 10);
   brightnessTarget_ = declare_parameter<int>("brightness_target", 120);
   brightnessTolerance_ = declare_parameter<int>("brightness_tolerance", 5);
   currentBrightness_ = brightnessTarget_;
