@@ -1,5 +1,5 @@
 repositories:
   flir_camera_drivers:
     type: git
-    url: https://github.com/ros-drivers/flir_camera_drivers.git
+    url: https://github.com/ros-drivers/flir_camera_driver.git
     version: master
