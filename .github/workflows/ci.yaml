@@ -12,7 +12,20 @@ on:
     branches: [ master]
 
 jobs:
-  build_ros2:
-    uses: ros-event-camera/ros-build-action/.github/workflows/build_ros2.yml@master
-    with:
-      repo: ${{ github.event.repository.name }}
+  build_jammy_humble:
+    runs-on: ubuntu-22.04
+    container:
+      image: berndpfrommer/jammy_humble
+    name: jammy/humble (x86_64)
+    steps:
+      - name: check out github repo
+        uses: actions/checkout@v3
+        with:
+          path: src/${{ github.event.repository.name }}
+          fetch-depth: 0
+      - name: compile and test
+        id: compile_and_test
+        uses: ros-event-camera/ros-build-action@master
+        with:
+          repo: ${{ github.event.repository.name }}
+          ros_distro: humble
