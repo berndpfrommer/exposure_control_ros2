@@ -1,5 +1,5 @@
 repositories:
-  event_camera_msgs:
+  flir_camera_drivers:
     type: git
     url: https://github.com/ros-drivers/flir_camera_drivers.git
     version: master
