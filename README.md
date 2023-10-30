@@ -15,18 +15,17 @@ Make sure you have your ROS2 environment sourced, for example:
 source /opt/ros/galactic/setup.bash
 ```
 
-Create a workspace (``exposure_control_ros2_ws``), clone this repo, and use ``wstool``
-to pull in the remaining dependencies:
+Create a workspace (``exposure_control_ros2_ws``), clone this repo,
+and use ``vcs`` (ubuntu package ``python3-vcstool`` to pull in the
+remaining dependencies:
 
 ```
 mkdir -p ~/exposure_control_ros2_ws/src
 cd ~/exposure_control_ros2_ws
 git clone https://github.com/berndpfrommer/exposure_control_ros2 src/exposure_control_ros2
-wstool init src src/exposure_control_ros2/exposure_control_ros2.rosinstall
-
-# or to update an existing space
-# wstool merge -t src src/exposure_control_ros2/exposure_control_ros2.rosinstall
-# wstool update -t src
+cd src
+vcs import < exposure_control_ros2/exposure_control_ros2.repos
+cd ..
 ```
 
 Build the package:
